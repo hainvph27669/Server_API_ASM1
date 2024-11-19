@@ -28,10 +28,10 @@ router.get('/list', async (req, res) => {
 
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // add xe
-router.post('/add_xe', async(req, res)=>{
+router.post('/add_xe', async (req, res) => {
     await mongoose.connect(COMMON.uri);
 
     let car = req.body;
@@ -47,17 +47,7 @@ router.post('/add_xe', async(req, res)=>{
 })
 
 
-//xóa xe
-/*router.delete('/xoa_xe/:id', async(req, res) =>{
-    await mongoose.connect(COMMON.uri);
 
-    let id = req.body;
-    console.log(id)
-
-    await carModel.delete({_id:id});
-
-    res.redirect('../list')
-})*/
 
 router.delete('/xoa_xe/:id', async (req, res) => {
     const id = req.params.id;
@@ -76,7 +66,7 @@ router.delete('/xoa_xe/:id', async (req, res) => {
 });
 
 //update
-router.put('/update', async(req,res)=>{
+router.put('/update', async (req, res) => {
     await mongoose.connect(COMMON.uri)
 
     let car = req.body
@@ -93,48 +83,9 @@ router.put('/update', async(req,res)=>{
 
 
 
-/*
-//thêm xe
-router.post('/add', async (req, res) => {
-    await connectDB();
-    try {
-        const carData = req.body; // Dữ liệu gửi qua body
-        const newCar = await carModel.create(carData); // Tạo xe mới
-        res.status(201).send({ message: 'Thêm xe thành công', data: newCar });
-    } catch (err) {
-        res.status(500).send({ message: 'Lỗi khi thêm xe', error: err.message });
-    }
-});
 
-// **Sửa thông tin xe**
-router.put('/update/:id', async (req, res) => {
-    await connectDB();
-    const { id } = req.params; // Lấy ID từ URL
-    try {
-        const updatedCar = await carModel.findByIdAndUpdate(id, req.body, { new: true });
-        if (!updatedCar) {
-            return res.status(404).send({ message: 'Không tìm thấy xe với ID này' });
-        }
-        res.send({ message: 'Cập nhật xe thành công', data: updatedCar });
-    } catch (err) {
-        res.status(500).send({ message: 'Lỗi khi cập nhật xe', error: err.message });
-    }
-});
 
-// **Xóa xe**
-router.delete('/delete/:id', async (req, res) => {
-    await connectDB();
-    const { id } = req.params; // Lấy ID từ URL
-    try {
-        const deletedCar = await carModel.findByIdAndDelete(id);
-        if (!deletedCar) {
-            return res.status(404).send({ message: 'Không tìm thấy xe với ID này' });
-        }
-        res.send({ message: 'Xóa xe thành công', data: deletedCar });
-    } catch (err) {
-        res.status(500).send({ message: 'Lỗi khi xóa xe', error: err.message });
-    }
-});*/
+
 
 module.exports = router;
 
